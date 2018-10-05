@@ -9,7 +9,12 @@ void draw()
 }
 class NormalParticle
 {
-	//your code here
+	double x, y, Color, speed, angle;
+	NormalParticle(){
+		x = y = 250;
+		Color = 255;
+
+	}
 }
 interface Particle
 {
