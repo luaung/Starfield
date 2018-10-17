@@ -2,9 +2,10 @@ NormalParticle[] stars;
 backgroundStars[] bStars;
 float zoom;
 void setup(){
-  size(500,500);
-  //frameRate(5);
-  stars = new NormalParticle[1000];
+  size(600,600);
+  background(0);
+
+  stars = new NormalParticle[800];
   for(int i=0; i < stars.length; i++){
     stars[i] = new NormalParticle();    
   }
@@ -16,7 +17,8 @@ void setup(){
 }
 
 void draw(){
- background(0);
+ fill(0,0,0,70);
+ rect(0,0,600,600);
  zoom = map(mouseX, 0, width, 0, 5);
  translate(width/2,height/2);
   for(int i=0; i < stars.length; i++){
@@ -26,7 +28,9 @@ void draw(){
   for(int j=0; j < bStars.length; j++){
     bStars[j].show();
   }
+
 }
+
 
 
 
@@ -58,14 +62,14 @@ class NormalParticle
     myX = 0;
     myY = 0;
     Color = 255;
-    velocity = Math.random()*10;
-    acceleration = .01;
+    velocity = Math.random()*1;
+    acceleration = 1.05;
     angle = (Math.random() * (Math.PI * 2));
     
   }
   
   void move(){
-    velocity += acceleration;
+    velocity =velocity*acceleration;
     
     myX += (Math.cos(angle) * velocity);
     myY += (Math.sin(angle) * velocity);
@@ -76,12 +80,14 @@ class NormalParticle
       myX = 0;
       myY = 0;
       angle = (Math.random() * (Math.PI * 2));
+      velocity = Math.random()*1;
       
     }
     if (myY > height || myY < -height){
       myX = 0;
       myY = 0;
       angle = (Math.random() * (Math.PI * 2));
+      velocity = Math.random()*1;
       
 
     }
