@@ -1,6 +1,7 @@
 NormalParticle[] stars;
 backgroundStars[] bStars;
 float zoom;
+//float opacity;
 void setup(){
   size(600,600);
   background(0);
@@ -17,9 +18,10 @@ void setup(){
 }
 
 void draw(){
- fill(0,0,0,70);
+ //opacity = map(mouseX,-width/2,width/2,30,80);
+ fill(0,0,0,75);
  rect(0,0,600,600);
- zoom = map(mouseX, 0, width, 0, 5);
+ //zoom = map(mouseX, 0, width, 0, 5);
  translate(width/2,height/2);
   for(int i=0; i < stars.length; i++){
     stars[i].move();
@@ -53,7 +55,7 @@ class backgroundStars{
 }
 
 
-class NormalParticle
+class NormalParticle implements Particle
 {
   double myX, myY, velocity, acceleration, angle;
   int Color;
@@ -109,12 +111,19 @@ interface Particle
 {
 	//your code here
 }
-class OddballParticle //uses an interface
+class OddballParticle 
 {
 	//your code here
 }
-class JumboParticle //uses inheritance
+class JumboParticle extends NormalParticle
 {
-	//your code here
+	void show(){
+    float starSizeX = map((float)myX, 0, width, 0, 8);
+    float starSizeY = map((float)myY, 0, width, 0, 8);
+    noStroke();
+    fill(231, 234, 44);
+    ellipse((float)myX,(float)myY,starSizeX*10,starSizeX*10);
+    ellipse((float)myX,(float)myY,starSizeY*10,starSizeY*10);
+  }
 }
 
