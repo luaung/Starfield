@@ -1,35 +1,30 @@
-NormalParticle[] stars;
-backgroundStars[] bStars;
-float zoom;
-//float opacity;
+Particle[] stars;
+
 void setup(){
   size(600,600);
   background(0);
 
-  stars = new NormalParticle[800];
-  for(int i=0; i < stars.length; i++){
+  stars = new Particle[800];
+    stars[0] = new JumboParticle();
+  for(int i=1; i < stars.length; i++){
     stars[i] = new NormalParticle();    
   }
+
   
-  bStars = new backgroundStars[00];
-  for(int j=0; j < bStars.length; j++){
-    bStars[j] = new backgroundStars();
-  }
+ 
 }
 
 void draw(){
  //opacity = map(mouseX,-width/2,width/2,30,80);
  fill(0,0,0,75);
  rect(0,0,600,600);
- //zoom = map(mouseX, 0, width, 0, 5);
+
  translate(width/2,height/2);
   for(int i=0; i < stars.length; i++){
     stars[i].move();
     stars[i].show();
   }
-  for(int j=0; j < bStars.length; j++){
-    bStars[j].show();
-  }
+  
 
 }
 
@@ -37,22 +32,7 @@ void draw(){
 
 
 
-class backgroundStars{
-  
-  float bX, bY, r;
-  
-  backgroundStars(){
-    bX = (float)(Math.random()*width-width/2);
-    bY = (float)(Math.random()*height-height/2);
-    r = (float)(Math.random()*2);
-  }
-  
-  void show(){
-    noStroke();
-    fill(255);
-    ellipse(bX, bY, r, r);
-  }
-}
+
 
 
 class NormalParticle implements Particle
@@ -63,7 +43,6 @@ class NormalParticle implements Particle
   NormalParticle(){
     myX = 0;
     myY = 0;
-    Color = 255;
     velocity = Math.random()*1;
     acceleration = 1.05;
     angle = (Math.random() * (Math.PI * 2));
@@ -109,7 +88,9 @@ class NormalParticle implements Particle
 
 interface Particle
 {
-	//your code here
+	public void move();
+	public void show();
+
 }
 class OddballParticle 
 {
@@ -117,13 +98,17 @@ class OddballParticle
 }
 class JumboParticle extends NormalParticle
 {
+	
+	JumboParticle(){   
+ 	}
+
 	void show(){
-    float starSizeX = map((float)myX, 0, width, 0, 8);
-    float starSizeY = map((float)myY, 0, width, 0, 8);
-    noStroke();
-    fill(231, 234, 44);
-    ellipse((float)myX,(float)myY,starSizeX*10,starSizeX*10);
-    ellipse((float)myX,(float)myY,starSizeY*10,starSizeY*10);
+    	float starSizeX = map((float)myX, 0, width, 0, 40);
+    	float starSizeY = map((float)myY, 0, width, 0, 40);
+    	noStroke();
+    	fill(66, 134, 244);
+    	ellipse((float)myX,(float)myY,starSizeX,starSizeX);
+    	ellipse((float)myX,(float)myY,starSizeY,starSizeY);
   }
 }
 
