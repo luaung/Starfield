@@ -6,7 +6,8 @@ void setup(){
 
   stars = new Particle[800];
     stars[0] = new JumboParticle();
-  for(int i=1; i < stars.length; i++){
+    stars[1] = new OddballParticle();
+  for(int i=2; i < stars.length; i++){
     stars[i] = new NormalParticle();    
   }
 
@@ -92,9 +93,20 @@ interface Particle
 	public void show();
 
 }
-class OddballParticle 
+class OddballParticle implements Particle
 {
-	//your code here
+  int myX,myY;
+	OddballParticle(){
+    myX = myY = 0;
+  }
+  void move(){
+    myX += (int)(Math.random()*7-3);
+    myY += (int)(Math.random()*7-3);
+  }
+  void show(){
+    fill(255,0,0);
+    ellipse(myX,myY,30,30);
+  }
 }
 class JumboParticle extends NormalParticle
 {
